@@ -15,7 +15,8 @@ module.exports 	 = function path_factory(usage) {
 
 	var path_to_dir 		= _.map(envs, function(env) {
 		var path_to_backup  = base_path + "/backup/" + env + "/" + formated_date;
-		var path_to_report  = base_path + "/report/" + env + "/" + formated_date;
+		// var path_to_report  = base_path + "/report/" + env + "/" + formated_date;
+		var path_to_report = "/usr/local/var/www/" + env + "/" + formated_date;
 		
 
 		var arr_backup_files = _.compact(_.map(fs.readdirSync(path_to_backup), function (file) {
@@ -26,8 +27,14 @@ module.exports 	 = function path_factory(usage) {
 				}
 		}));
 	
+		
+
 		var arr_report_files = _.map(arr_backup_files, function(file) {
-			return (path_to_report + "/" + file.slice(-2)) + ".log"
+
+			var day_before = Date.create(file.slice(-8)).addDays(-1).format("{dd}");
+			
+			return (path_to_report + "/" + day_before + "-" + file.slice(-2)) +  ".log"
+
 		})
 			
 		var path_to_files = [arr_backup_files, arr_report_files]
