@@ -25,10 +25,10 @@ module.exports = function create_migration_files(path_to_dir, env) {
 					if( /Completed\s[45]/.test(matched) ){
 						// 正規表現の先読み(?<=pattern)が使えない？
 						var entry = matched
-						var timestamp = matched.match(/[0-9]{4}-([0-9]{2}-?){2}\s([0-9]{2}:?){3}\s\+[0-9]{4}/mg)
+						var occurred_date = matched.match(/[0-9]{4}-([0-9]{2}-?){2}\s([0-9]{2}:?){3}\s\+[0-9]{4}/mg)
 						var error_status = matched.match(/(Completed\s)[0-9]{3}/gm)[0].slice(10)
 						var ip_address = matched.match(/([0-9]{1,3}\.?){4}(?=\sat?)/)[0]
-						entries = [entry, timestamp, error_status, ip_address]
+						entries = [entry, occurred_date, error_status, ip_address]
 						return entries
 
 					} else {
