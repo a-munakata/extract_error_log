@@ -9,11 +9,11 @@ module.exports = function backup_logs (path_from_factory) {
 	var $ 								= require ('jquery'),
 			dfd 							= $.Deferred()
 			
-		dfd			
+		dfd
 			.then(function(arg) {		
 				setTimeout(function() {
 					secure_copy(path_from_factory)
-				}, 1000)																	
+				}, 0)																	
 				console.log("secure_copy Done")
 			})
 			.then(function(arg) {
@@ -25,16 +25,18 @@ module.exports = function backup_logs (path_from_factory) {
 			.then(function(arg) {					
 				setTimeout(function() {
 					move_files(path_from_factory)
-				}, 3000)				
+				}, 4000)				
 				console.log("move_files Done")
 			})
 			.then(function(arg) {
 				setTimeout(function() {
 					validate_time(path_from_factory)
-				}, 4000)				
-				console.log("move_files Done")
+				}, 5000)				
+				console.log("validate_time Done")
 			})
 									
 	  dfd.resolve();
+
+
 }
 
